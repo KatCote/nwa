@@ -20,6 +20,7 @@ void* capture_thread(void* arg);
 /* E X T E R N */
 
 extern volatile int running;
+extern volatile int capture_pause;
 extern volatile int cursor_pos;
 
 /* D E F I N E S */

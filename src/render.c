@@ -56,7 +56,7 @@ void* render_thread(void* arg)
 
         wattron(left_win, COLOR_PAIR(3));
 
-        mvwprintw(left_win, 0, 2, "┘SNDR MAC⬎└");
+        mvwprintw(left_win, 0, 2, "┘SRC MAC⬎└");
 
         mvwprintw(left_win, 1, 1,
             s_tlr s_h s_h s_trr s_s
@@ -99,7 +99,7 @@ void* render_thread(void* arg)
 
         wattron(left_win, COLOR_PAIR(3));
 
-        mvwprintw(left_win, 4, 2, "┘RECV MAC⬎└");
+        mvwprintw(left_win, 4, 2, "┘DST MAC⬎└");
 
         mvwprintw(left_win, 5, 1,
             s_tlr s_h s_h s_trr s_s
@@ -157,13 +157,40 @@ void* render_thread(void* arg)
             int idx = (packet_head - 1 - i + MAX_PACKETS) % MAX_PACKETS;
 
             if (idx % 2 == 0) { wattron(right_win, COLOR_PAIR(4)); } else { wattron(right_win, COLOR_PAIR(5)); }
-
+            
             for (int j = 0; j < (term_width - SETTINGS_WIN_WIDTH - 2); j++)
             { mvwaddch(right_win, first_line + lines_to_show - 1 - i, j + 1, ' '); }
+            
+            mvwprintw(right_win, first_line + lines_to_show - 1 - i, 3, "%s", packet_list[idx]);
+            
+            wattron(right_win, A_BOLD);
 
-            //wattron(right_win, A_BOLD);
-            mvwprintw(right_win, first_line + lines_to_show - 1 - i, 2, "%s", packet_list[idx]);
-            //wattroff(right_win, A_BOLD);
+            if (packet_list[idx][0] == 0)
+            {
+                wattron(right_win, COLOR_PAIR(9));
+                mvwprintw(right_win, first_line + lines_to_show - 1 - i, 1, "UKWN");
+                wattroff(right_win, COLOR_PAIR(9));
+            }
+            else if (packet_list[idx][0] == 1)
+            {
+                wattron(right_win, COLOR_PAIR(6));
+                mvwprintw(right_win, first_line + lines_to_show - 1 - i, 1, "IPv4");
+                wattroff(right_win, COLOR_PAIR(6));
+            }
+            else if (packet_list[idx][0] == 2)
+            {
+                wattron(right_win, COLOR_PAIR(7));
+                mvwprintw(right_win, first_line + lines_to_show - 1 - i, 1, "ARP ");
+                wattroff(right_win, COLOR_PAIR(7));
+            }
+            else if (packet_list[idx][0] == 3)
+            {
+                wattron(right_win, COLOR_PAIR(8));
+                mvwprintw(right_win, first_line + lines_to_show - 1 - i, 1, "IPv6");
+                wattroff(right_win, COLOR_PAIR(8));
+            }
+
+            wattroff(right_win, A_BOLD);
 
             if (idx % 2 == 0) { wattroff(right_win, COLOR_PAIR(4)); } else { wattroff(right_win, COLOR_PAIR(5)); }
         }
@@ -173,7 +200,7 @@ void* render_thread(void* arg)
 
         wattroff(right_win, COLOR_PAIR(2));
 
-        usleep(5000);
+        usleep(500);
     }
 
     if (left_win) delwin(left_win);

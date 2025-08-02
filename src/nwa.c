@@ -67,9 +67,9 @@ int init()
     initscr();
 
     if (has_colors())
-	{  
+    {
         start_color();  
-		use_default_colors(); 
+        use_default_colors(); 
 
         init_color(11, 900, 900, 900);
         init_pair(1, 11, -1);
@@ -87,6 +87,24 @@ int init()
         init_color(16, 200, 200, 200);
         init_color(17, 900, 900, 900);
         init_pair(5, 17, 16);
+
+        /* Protocols */
+
+        init_color(18, 228*4, 0, 0);
+        init_color(19, 85*4, 0, 0);
+        init_pair(6, 18, 19); // IPv4
+
+        init_color(20, 0, 228*4, 0);
+        init_color(21, 0, 85*4, 0);
+        init_pair(7, 20, 21); // ARP
+
+        init_color(22, 0, 0, 228*4);
+        init_color(23, 0, 0, 85*4);
+        init_pair(8, 22, 23); // IPv6
+
+        init_color(24, 600, 600, 600);
+        init_color(25, 100, 100, 100);
+        init_pair(9, 24, 25); // Unknown
     }
 	else
 	{

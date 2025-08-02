@@ -38,7 +38,9 @@ void* input_thread(void* arg)
         } else if (isxdigit(ch)) {
             src_mac[cursor_pos] = toupper(ch);
             if (cursor_pos < 11) cursor_pos++;
-        }
+        } else if (ch == ' ') {
+            capture_pause = capture_pause ? 0 : 1;
+        } else { continue; }
     }
     return NULL;
 }
