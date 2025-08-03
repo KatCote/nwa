@@ -9,6 +9,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <string.h>
 
 /* P R O T O T Y P E S */
 

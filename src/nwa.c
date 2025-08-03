@@ -102,9 +102,29 @@ int init()
         init_color(23, 0, 0, 85*4);
         init_pair(8, 22, 23); // IPv6
 
-        init_color(24, 600, 600, 600);
-        init_color(25, 100, 100, 100);
-        init_pair(9, 24, 25); // Unknown
+        init_color(24, 85*4, 0, 85*4);
+        init_color(25, 228*4, 0, 228*4);
+        init_pair(9, 25, 24); // Unknown
+
+        init_color(26, 85*4, 85*4, 0);
+        init_color(27, 228*4, 228*4, 0);
+        init_pair(10, 27, 26); // VLAN
+
+        init_color(28, 400, 0, 1000);
+        init_color(29, 240, 0, 600);
+        init_pair(11, 28, 29); // UDP
+
+        init_color(30, 1000, 0, 600);
+        init_color(31, 400, 0, 240);
+        init_pair(12, 30, 31); // UDP
+
+        init_color(32, 0, 1000, 800);
+        init_color(33, 0, 600, 500);
+        init_pair(13, 32, 33); // IGMP
+
+        init_color(34, 500, 1000, 0);
+        init_color(35, 400, 600, 0);
+        init_pair(14, 34, 35); // ICMP
     }
 	else
 	{
